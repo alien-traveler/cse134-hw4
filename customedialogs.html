@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    
+    <title>Custom Dialogs</title>
+</head>
+<body>
+    <main>
+        <h1>Custom Dialogs</h1>
+        <button id="alert" type="button">Alert</button>
+        <button id="confirm" type="button">Confirm</button>
+        <button id="prompt" type="button">Prompt</button>
+        <hr>
+        <template>
+            <dialog id="myDialog" open>hi!
+            </dialog>
+            <output id="outputTag"></output>
+        </template>
+        <!-- <output id="permOutput"></output> -->
+    </main>
+    <script src="/node_modules/dompurify/dist/purify.js"></script>
+    <script type="module">
+        import {clickAlert, clickConfirm, clickSaferPrompt} from './js/customdialog.js';
+        // alert
+        document.getElementById("alert").onclick = clickAlert;
+
+        // confirm
+        document.getElementById("confirm").onclick = function() {
+            //document.getElementById("outputTag").remove();
+            clickConfirm();
+            //document.getElementById("permOutput").innerHTML = userFeedback;
+        };
+        
+        // prompt
+        document.getElementById("prompt").onclick = clickSaferPrompt;
+        
+    </script>    
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie CRUD</title>
+</head>
+<body>
+    <main>
+        <h1>Big List of Movies</h1>
+        <ul id="movieList">
+
+        </ul>
+        <button id="addMovieBtn">Add Movie</button>
+    </main>
+    <script src="/node_modules/dompurify/dist/purify.js"></script>
+    <script type="module">
+        import {addMovie} from "./js/blog.js";
+        document.getElementById("addMovieBtn").onclick = addMovie;
+    </script>
+</body>
+</html>

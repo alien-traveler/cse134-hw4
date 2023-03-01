@@ -4,13 +4,13 @@
 
 function clickConfirm() {
     let result = confirm("Do you confirm this?");
-    const outputTag = document.getElementById("result_paragraph");
+    const outputTag = document.getElementById("output_tag");
     outputTag.innerHTML = "The value returned by the confirm method is : " + result;
 }
 
 function clickPrompt() {
     let result = prompt("What is your name?");
-    const outputTag = document.getElementById("result_paragraph");
+    const outputTag = document.getElementById("output_tag");
     if (result == null || result == "") {
         outputTag.innerHTML = "User didn't put anything!";
     } else {
