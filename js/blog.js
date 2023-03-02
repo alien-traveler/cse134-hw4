@@ -70,39 +70,28 @@ function getUserInput(createOrEdit, index) {
     okBtn.addEventListener("click", () => {
         cloneDialog.remove();
         let cleanInput1 = DOMPurify.sanitize(cloneInput.value);
-        // if (cleanInput1 == undefined) {cleanInput1 = "";}
         let cleanInput2 = DOMPurify.sanitize(cloneInput2.value);
-        // if (cleanInput2 == undefined) {cleanInput2 = "";}
         let cleanInput3 = DOMPurify.sanitize(cloneInput3.value);
-        // if (cleanInput3 == undefined) {cleanInput3 = "";}
         // store input into localStorage
-        // create mode
-        let post;
+        
+        // let post;
         if (createOrEdit == 0) {
-            post = setUserInput(cleanInput1, cleanInput2, cleanInput3);
+            // create mode
+            // delete all previous li
+            deleteAllLi();
+            let postsArray = setUserInput(cleanInput1, cleanInput2, cleanInput3);
             // display new post
-            displayBlogsFromStorage([post]);
+            displayBlogsFromStorage(postsArray);
         } else {
             // edit mode
-            post = editUserInput(cleanInput1, cleanInput2, cleanInput3, index);
-            // display changed post
-            displayChangedPost(post, index);
+            deleteAllLi();
+            let postsArray = editUserInput(cleanInput1, cleanInput2, cleanInput3, index);
+            // use displayBlogsFromStorage to do the whole ul
+            displayBlogsFromStorage(postsArray);
         }
     });
     // add to body
     document.getElementById("blogList").appendChild(cloneTemp);
-}
-
-function displayChangedPost(post, index) {
-    let currPostTag = document.getElementsByTagName("li")[index];
-    currPostTag.textContent = "Post Title: " + post["PostTitle"] 
-        + "; Date: " + post["Date"] + "; Summary: " + post["Summary"];
-    let editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", () => {
-        getUserInput(1, index);
-    });
-    currPostTag.appendChild(editBtn);
 }
 
 function editUserInput(cleanInput1, cleanInput2, cleanInput3, index) {
@@ -115,23 +104,14 @@ function editUserInput(cleanInput1, cleanInput2, cleanInput3, index) {
     postsArray[index] = currPost;
     let stringArray = JSON.stringify(postsArray);
     setBlogsToStorage(stringArray);
-    return currPost;
-    // let postsArray = getBlogsFromStorage();
-    // let index = countIndex(parentPost);
-    // console.log(parentPost);
-    // console.log(index);
-    // parentPost["PostTitle"] = cleanInput1;
-    // parentPost["Date"] = cleanInput2;
-    // parentPost["Summary"] = cleanInput3;
-    // postsArray[index] = parentPost;
-    // let stringArray = JSON.stringify(postsArray);
-    // setBlogsToStorage(stringArray);
-    // return parentPost;
+    return postsArray;
 }
 
-function deleteNoBlogString() {
-    let initialBlog = document.getElementsByTagName("li")[0];
-    initialBlog.remove();
+function deleteAllLi() {
+    let previousLiArray = document.querySelectorAll("li");
+    for (let i = 0; i < previousLiArray.length; i++){
+        previousLiArray[i].remove();
+    }
 }
 
 function setUserInput(input1, input2, input3) {
@@ -145,10 +125,9 @@ function setUserInput(input1, input2, input3) {
     if (postsArray === null || postsArray.length === 0) {
         let newPostArray = [newPost];
         let stringNewArray = JSON.stringify(newPostArray);
+        postsArray = newPostArray;
         // window.localStorage.setItem("postedBlogs", stringNewArray);
         setBlogsToStorage(stringNewArray);
-        // delete "no blog" string
-        deleteNoBlogString();
     } else {
         // add new post to existing post array
         postsArray.push(newPost);
@@ -156,7 +135,7 @@ function setUserInput(input1, input2, input3) {
         // window.localStorage.setItem("postedBlogs", JSON.stringify(postsArray));
         setBlogsToStorage(stringNewArray);
     }
-    return newPost;
+    return postsArray;
 }
 
 function setBlogsToStorage(stringArray) {
@@ -175,6 +154,9 @@ function getBlogsFromStorage() {
 
 function displayBlogsFromStorage(blogs) {
     let unorderedList = document.getElementById("blogList");
+    // delete previous li
+    // document.querySelectorAll("li").remove();
+
     // if there is no blog
     if (blogs === null || blogs.length === 0) {
         let emptyLi = document.createElement("li");
@@ -182,7 +164,6 @@ function displayBlogsFromStorage(blogs) {
         unorderedList.appendChild(emptyLi);
         return;
     }
-    // console.log(unorderedList);
     
     for (let i = 0; i < blogs.length; i++) {
         let post = blogs[i];
@@ -256,16 +237,3 @@ function deleteLi(parentPost, index) {
     });
     document.getElementById("blogList").appendChild(cloneTemp);
 }
-
-// function countIndex(parentPost) {
-//     let blogs = getBlogsFromStorage();
-//     for (let i = 0; i < blogs.length; i++) {
-//         let post = blogs[i];
-//         let text = "Post Title: " + post["PostTitle"] 
-//         + "; Date: " + post["Date"] + "; Summary: " + post["Summary"];
-//         if (text == parentPost.textContent) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
