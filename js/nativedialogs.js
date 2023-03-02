@@ -22,7 +22,7 @@ function clickPrompt() {
 function clickSaferPrompt() {
     let result = prompt("What is your name?");
     result = DOMPurify.sanitize(result);
-    const outputTag = document.getElementById("result_paragraph");
+    const outputTag = document.getElementById("output_tag");
     if (result == null || result == "") {
         outputTag.innerHTML = "User didn't put anything!";
     } else {
