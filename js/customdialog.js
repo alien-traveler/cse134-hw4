@@ -1,6 +1,7 @@
 
 export function clickAlert() {
-    // alert("Alert Pressed!");
+    let outputTag = document.getElementById("permOutput");
+    outputTag.textContent = "";
     let temp = document.getElementsByTagName("template")[0];
     const cloneTemp = temp.content.cloneNode(true);
     // dialog
@@ -19,7 +20,6 @@ export function clickAlert() {
     document.body.appendChild(cloneTemp);
 }
 
-// export var userFeedback = "-1";
 export function clickConfirm() {
     // clone temp tag
     let temp = document.getElementsByTagName("template")[0];
@@ -29,31 +29,29 @@ export function clickConfirm() {
     cloneDialog.innerHTML = "Do you confirm?";
     // create new line
     cloneDialog.appendChild(document.createElement("br"));
-    // output
-    let cloneOutput = cloneTemp.getElementById("outputTag");
-    // let userFeedback = "-1";
+    let userFeedback = true;
     // cancel button
     let cancelBtn = document.createElement('button');
     cancelBtn.innerHTML = "Cancel";
     cloneDialog.appendChild(cancelBtn);
     cancelBtn.addEventListener("click", () => {
+        let outputTag = document.getElementById("permOutput");
+        outputTag.textContent = "Confirm result: false";
         cloneDialog.remove();
-        // userFeedback = "false";
-        cloneOutput.innerHTML = "Confirm result: false";
     });
     // ok button
     let okBtn = document.createElement('button');
     okBtn.innerHTML = "OK";
     cloneDialog.appendChild(okBtn);
     okBtn.addEventListener("click", () => {
+        let outputTag = document.getElementById("permOutput");
+        outputTag.textContent = "Confirm result: true";
         cloneDialog.remove();
-        // userFeedback = "true";
-        cloneOutput.innerHTML = "Confirm result: true";
     });
     
     // add to body
     document.body.appendChild(cloneTemp);
-    
+    return userFeedback;
 }
 
 // user enter: <b onmouseover="alert('pwned')">Roll me</b>
@@ -63,7 +61,7 @@ export function clickSaferPrompt() {
     const cloneTemp = temp.content.cloneNode(true);
     // dialog
     let cloneDialog = cloneTemp.getElementById("myDialog");
-    cloneDialog.innerHTML = "Do you confirm?";
+    cloneDialog.innerHTML = "What is your name?";
     // create new line
     cloneDialog.appendChild(document.createElement("br"));
     // user input
@@ -73,16 +71,14 @@ export function clickSaferPrompt() {
     cloneDialog.appendChild(cloneInput);
     // create new line
     cloneDialog.appendChild(document.createElement("br"));
-    // output
-    let cloneOutput = cloneTemp.getElementById("outputTag");
-    // let userFeedback = "-1";
     // cancel button
     let cancelBtn = document.createElement('button');
     cancelBtn.innerHTML = "Cancel";
     cloneDialog.appendChild(cancelBtn);
     cancelBtn.addEventListener("click", () => {
         cloneDialog.remove();
-        cloneOutput.innerHTML = "User didn't put anything!";
+        let outputTag = document.getElementById("permOutput");
+        outputTag.textContent = "User didn't put anything!";
     });
     // ok button
     let okBtn = document.createElement('button');
@@ -91,10 +87,12 @@ export function clickSaferPrompt() {
     okBtn.addEventListener("click", () => {
         cloneDialog.remove();
         let cleanValue = DOMPurify.sanitize(cloneInput.value);
+        let outputTag = document.getElementById("permOutput");
+        
         if (cleanValue == "" || cleanValue == null) {
-            cloneOutput.innerHTML = "User didn't put anything!";    
+            outputTag.textContent = "User didn't put anything!";  
         } else {
-            cloneOutput.innerHTML = cleanValue;
+            outputTag.textContent = "Prompt result: " + cleanValue;  
         }
     });
     

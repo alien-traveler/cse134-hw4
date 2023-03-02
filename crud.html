@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie CRUD</title>
+    <title>Blog CRUD</title>
 </head>
 <body>
     <main>
-        <h1>Big List of Movies</h1>
-        <ul id="movieList">
+        <h1>Big List of Blogs</h1>
+        <ul id="blogList">
 
         </ul>
-        <button id="addMovieBtn">Add Movie</button>
+        <button id="addBlogBtn">Add Movie</button>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.1/dist/purify.min.js"></script>
     <script type="module">
-        import {addMovie} from "./js/blog.js";
-        document.getElementById("addMovieBtn").onclick = addMovie;
+        import {init, addBlog} from "./js/blog.js";
+        window.addEventListener("DOMContentLoaded", init);
+        document.getElementById("addBlogBtn").onclick = addBlog;
     </script>
 </body>
 </html>
