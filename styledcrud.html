@@ -4,48 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        html {
-            margin: 0 20%;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        h1 {
-            margin: 5% 0;
-            text-align: center;
-            color:cadetblue;
-            
-        }
-        ul {
-            list-style: none;
-            text-align: center;
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: column;
-            justify-content: center;
-        }
-        li {
-            margin: 2% 0;
-            padding: 2% 0;
-            border: 1px solid black;
-            background-color: aliceblue;
-            
-        }
-        #addBlogBtn {
-            margin: 5%;
-            padding: 1%;
-            background-color: aliceblue;
-            border: 1px solid black;
-            box-shadow: 0 5px 0 rgb(0, 69, 69);
-        }
-        #addBlogBtn:hover {
-            cursor: pointer;
-            background-color: rgba(100, 255, 255, 0.597);
-            box-shadow: none;
-        }
-    </style>
+    <link rel="stylesheet" media="screen and (min-width: 768px)" href="css/styledcrud_pc.css">
+    <link rel="stylesheet" media="screen and (min-width: 640px) and (max-width: 767px)" href="css/styledcrud_tablet.css">
+    <link rel="stylesheet" media="screen and (max-width: 639px)" href="css/styledcrud_mobile.css">
     <title>Styled Blog CRUD</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul class="navLinks">
+                <li><a href="/index.html">Will's Website!</a></li>
+                <li><a href="/Projects.html">My Project</a></li>
+                <li><a href="/Interest.html">My Interests</a></li>
+                <li><a href="/styledcrud.html">My Posts</a></li>
+                <li><a href="/Contact.html">Contact Me!</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
         <h1>Big List of Blogs</h1>
         <ul id="blogList">
@@ -56,8 +31,8 @@
         <button id="addBlogBtn">Add Blog</button>
     </main>
     
-    <!-- <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.1/dist/purify.min.js"></script> -->
-    <script src="/node_modules/dompurify/dist/purify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.1/dist/purify.min.js"></script>
+    <!-- <script src="/node_modules/dompurify/dist/purify.js"></script> -->
 
     <script type="module">
         import {init, addBlog} from "./js/blog2.js";
