@@ -1,3 +1,6 @@
+
+import {styleInputNLabel, styleInput3, styleCancelOKBtn, styleEditBtn, styleDeleteBtn} from "./styledelements.js";
+
 export function addBlog() {
     getUserInput(0);
 }
@@ -25,6 +28,11 @@ function getUserInput(createOrEdit, index) {
     cloneDialog.appendChild(cloneInput);
     // create new line
     cloneDialog.appendChild(document.createElement("br"));
+    // style
+    // cloneLabel1.style.margin = "1ch 0";
+    // cloneInput.style.margin = "1ch 0";
+    styleInputNLabel(cloneLabel1);
+    styleInputNLabel(cloneInput);
 
     // label2 for date
     let cloneLabel2 = document.createElement("label");
@@ -39,6 +47,11 @@ function getUserInput(createOrEdit, index) {
     cloneDialog.appendChild(cloneInput2);
     // create new line
     cloneDialog.appendChild(document.createElement("br"));
+    // style
+    // cloneLabel2.style.margin = "1ch 0";
+    // cloneInput2.style.margin = "1ch 0";
+    styleInputNLabel(cloneLabel2);
+    styleInputNLabel(cloneInput2);
 
     // label3 for summary
     let cloneLabel3 = document.createElement("label");
@@ -55,6 +68,13 @@ function getUserInput(createOrEdit, index) {
     cloneDialog.appendChild(cloneInput3);
     // create new line
     cloneDialog.appendChild(document.createElement("br"));
+    // style
+    // cloneLabel3.style.margin = "1ch 0";
+    styleInputNLabel(cloneLabel3);
+    // cloneInput3.style.margin = "1ch 0";
+    // cloneInput3.style.width = "100%";
+    // cloneInput3.style.minHeight = "5ch";
+    styleInput3(cloneInput3);
 
     // cancel button
     let cancelBtn = document.createElement('button');
@@ -63,10 +83,18 @@ function getUserInput(createOrEdit, index) {
     cancelBtn.addEventListener("click", () => {
         cloneDialog.remove();
     });
+    // style
+    // cancelBtn.style.margin = "5%";
+    styleCancelOKBtn(cancelBtn);
+
     // save button
     let okBtn = document.createElement('button');
     okBtn.textContent = "Save";
     cloneDialog.appendChild(okBtn);
+    // style
+    // okBtn.style.margin = "5%";
+    styleCancelOKBtn(okBtn);
+    // click function
     okBtn.addEventListener("click", () => {
         cloneDialog.remove();
         let cleanInput1 = DOMPurify.sanitize(cloneInput.value);
@@ -178,6 +206,8 @@ function createPostLi(post, index) {
     // add content to li
     emptyLi.textContent = "Post Title: " + post["PostTitle"] 
         + "; Date: " + post["Date"] + "; Summary: " + post["Summary"];
+    // add new line
+    emptyLi.appendChild(document.createElement("br"));
     // add Edit button
     let editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
@@ -189,6 +219,17 @@ function createPostLi(post, index) {
         getUserInput(1, index);
     });
     emptyLi.appendChild(editBtn);
+    // style
+    // editBtn.style.margin = "1% 0";
+    // editBtn.style.backgroundColor = "aquamarine";
+    // let editImage = document.createElement("img");
+    // editImage.src = "./image/pencil_icon.webp";
+    // editImage.alt = "Sorry, image not available";
+    // editBtn.appendChild(editImage);
+    styleEditBtn(editBtn);
+    
+    // add new line
+    emptyLi.appendChild(document.createElement("br"));
     // add Delete button
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
@@ -197,6 +238,15 @@ function createPostLi(post, index) {
         deleteLi(parentPost, index);
     });
     emptyLi.appendChild(deleteBtn);
+    // style
+    // deleteBtn.style.margin = "1% 0";
+    // deleteBtn.style.backgroundColor = "aquamarine";
+    // let deleteImage = document.createElement("img");
+    // deleteImage.src = "./image/trash_icon.jpeg";
+    // deleteImage.alt = "Sorry, image not available";
+    // deleteBtn.appendChild(deleteImage);
+    styleDeleteBtn(deleteBtn);
+    
     unorderedList.appendChild(emptyLi);
 }
 
@@ -217,9 +267,17 @@ function deleteLi(parentPost, index) {
         cloneDialog.remove();
         return;
     });
+    // style
+    // cancelBtn.style.margin = "3%";
+    styleCancelOKBtn(cancelBtn);
+
     // ok button
     let okBtn = document.createElement('button');
     okBtn.textContent = "Ok";
+    // style
+    // okBtn.style.margin = "3%";
+    styleCancelOKBtn(okBtn);
+    
     cloneDialog.appendChild(okBtn);
     okBtn.addEventListener("click", () => {
         cloneDialog.remove();
@@ -227,11 +285,11 @@ function deleteLi(parentPost, index) {
         let blogs = getBlogsFromStorage();
         blogs.splice(index, 1);
         setBlogsToStorage(JSON.stringify(blogs));
-
         // test delete all li and insert existing fi
         // 3.2 test version
         deleteAllLi();
         displayBlogsFromStorage(blogs);
+
 
         // if delete the last one
         // if (blogs.length === 0 || blogs === null) {
