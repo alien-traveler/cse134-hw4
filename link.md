@@ -1,0 +1,6 @@
+1. [Github link](https://github.com/alien-traveler/cse134-hw4)
+2. [Netlify link](https://joyful-salamander-267c9a.netlify.app/)
+3. Part 1: [link](https://joyful-salamander-267c9a.netlify.app/nativedialogs.html)
+3. Part 2: [link](https://joyful-salamander-267c9a.netlify.app/customdialogs.html)
+4. Part 3: [link](https://joyful-salamander-267c9a.netlify.app/crud.html)
+5. Part 4: [link](https://joyful-salamander-267c9a.netlify.app/styledcrud.html)
